@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ColorPik</string>
+    <string name="Score">Score</string>
+    <string name="HighScore">High Score</string>
+    <string name="HighScore_val">HS_val</string>
+    <string name="NewHighScore">New High Score!!</string>
+    <string name="GameOver">Game Over!</string>
+    <string name="TryAgain">Try Again</string>
+    <string name="MainMenu">Main Menu</string>
+    <string name="time">time</string>
+    <string name="difficulty_easy">Difficulty Easy</string>
+    <string name="difficulty_hard">Difficulty Hard</string>
+    <string name="hard">Hard</string>
+    <string name="easy">Easy</string>
+    <string name="play">Play</string>
+    <string name="setting">settings</string>
+    <string name="sound">Sound</string>
+    <string name="vibration">Vibration</string>
+    <string name="moving">Moving</string>
+    <string name="EasyHighScore">High Score Easy</string>
+    <string name="HardHighScore">High Score Hard</string>
+    <string name="resume">Resume</string>
+</resources>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soft_black"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp"
+        android:gravity="center|top"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sarpanch_extrabold"
+            android:gravity="center"
+            android:text="@string/GameOver"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/main_text"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/highscoretext3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sarpanch_extrabold"
+            android:gravity="center"
+            android:text="@string/NewHighScore"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/main_text"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/scoretext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sarpanch_extrabold"
+            android:text="@string/Score"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/main_text"
+            android:textSize="48sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/tryagain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:maxWidth="200dp"
+            android:maxHeight="65dp"
+            android:minWidth="200dp"
+            android:minHeight="65dp"
+            android:soundEffectsEnabled="false"
+            android:text="@string/TryAgain"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:cornerRadius="10dp" />
+
+        <Button
+            android:id="@+id/mainmenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:maxWidth="200dp"
+            android:maxHeight="65dp"
+            android:minWidth="200dp"
+            android:minHeight="65dp"
+            android:soundEffectsEnabled="false"
+            android:text="@string/MainMenu"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:cornerRadius="10dp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

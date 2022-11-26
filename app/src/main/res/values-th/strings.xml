@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ColorPik</string>
+    <string name="Score">คะแนน</string>
+    <string name="HighScore">คะแนนสูงสุด</string>
+    <string name="HighScore_val">HS_val</string>
+    <string name="NewHighScore">ทำลายสถิติ!!</string>
+    <string name="GameOver">จบเกม!</string>
+    <string name="TryAgain">ลองอีกครั้ง</string>
+    <string name="MainMenu">หน้าหลัก</string>
+    <string name="time">เวลา</string>
+    <string name="difficulty_easy">ระดับง่าย</string>
+    <string name="difficulty_hard">ระดับยาก</string>
+    <string name="hard">ยาก</string>
+    <string name="easy">ง่าย</string>
+    <string name="play">เล่น</string>
+    <string name="setting">การตั้งค่า</string>
+    <string name="sound">เสียง</string>
+    <string name="vibration">การสั่น</string>
+    <string name="moving">การเคลื่อนไหว</string>
+    <string name="EasyHighScore">คะแนนสูงสุด ง่าย</string>
+    <string name="HardHighScore">คะแนนสูงสุด ยาก</string>
+    <string name="resume">เล่นต่อ</string>
+</resources>
