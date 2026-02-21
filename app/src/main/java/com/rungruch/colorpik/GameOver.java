@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+@SuppressWarnings("deprecation")
 public class GameOver extends AppCompatActivity {
     public static final String PREFS_DATA_Settings = "Settings_PREFS";
     public static final String Pref_Score_Easy = "Score_Easy_Pref";
@@ -72,47 +73,39 @@ public class GameOver extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.correct);
 
         final Button tryagain_btn = findViewById(R.id.tryagain);
-        tryagain_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if(Integer.parseInt(sound_status) == 1){mediaPlayer.start();}
-                if(Integer.parseInt(vibrate_status) == 1){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
-                    } else {
-                        v.vibrate(10);
-                    }}
-                Intent intent = new Intent(GameOver.this, GameActivity.class);
-                intent.putExtra("diff_status",difficulty_select);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
+        tryagain_btn.setOnClickListener(view -> {
+            playSoundAndVibrate();
+            Intent intent = new Intent(GameOver.this, GameActivity.class);
+            intent.putExtra("diff_status",difficulty_select);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finish();
         });
 
 
 
         final Button MainMenu = findViewById(R.id.mainmenu);
-        MainMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if(Integer.parseInt(sound_status) == 1){mediaPlayer.start();}
-                if(Integer.parseInt(vibrate_status) == 1){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
-                    } else {
-                        v.vibrate(10);
-                    }}
-                Intent intent = new Intent(GameOver.this, MainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
+        MainMenu.setOnClickListener(view -> {
+            playSoundAndVibrate();
+            Intent intent = new Intent(GameOver.this, MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finish();
         });
 
 
+    }
+
+    private void playSoundAndVibrate() {
+        if(Integer.parseInt(sound_status) == 1){mediaPlayer.start();}
+        if(Integer.parseInt(vibrate_status) == 1){
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+            } else {
+                v.vibrate(10);
+            }
+        }
     }
 
     @Override

@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class GameActivity extends AppCompatActivity {
     public static final String PREFS_DATA_Settings = "Settings_PREFS";
     public static final String Pref_Score_Easy = "Score_Easy_Pref";
@@ -95,101 +96,29 @@ public class GameActivity extends AppCompatActivity {
         start();
         correct_player = MediaPlayer.create(this, R.raw.correct);
         final ImageView pause = findViewById(R.id.pause);
-        pause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if(Integer.parseInt(sound_status) == 1){correct_player.start();}
-                if(Integer.parseInt(vibrate_status) == 1){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        a.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
-                    } else {
-                        a.vibrate(10);
-                    }}
-                showCustomDialog();
-            }
+        pause.setOnClickListener(view -> {
+            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            if(Integer.parseInt(sound_status) == 1){correct_player.start();}
+            if(Integer.parseInt(vibrate_status) == 1){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    a.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+                } else {
+                    a.vibrate(10);
+                }}
+            showCustomDialog();
         });
 
-        final Button btn1 = findViewById(R.id.btn1);
-        final Button btn2 = findViewById(R.id.btn2);
-        final Button btn3 = findViewById(R.id.btn3);
-        final Button btn4 = findViewById(R.id.btn4);
-        final Button btn5 = findViewById(R.id.btn5);
-        final Button btn6 = findViewById(R.id.btn6);
-        final Button btn7 = findViewById(R.id.btn7);
-        final Button btn8 = findViewById(R.id.btn8);
-        final Button btn9 = findViewById(R.id.btn9);
-        final Button btn10 = findViewById(R.id.btn10);
-        final Button btn11 = findViewById(R.id.btn11);
-        final Button btn12 = findViewById(R.id.btn12);
-        final Button btn13 = findViewById(R.id.btn13);
-        final Button btn14 = findViewById(R.id.btn14);
-        final Button btn15 = findViewById(R.id.btn15);
-        final Button btn16 = findViewById(R.id.btn16);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn1");}
-        });
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn2");}
-        });
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn3");}
-        });
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn4");}
-        });
-        btn5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn5");}
-        });
-        btn6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn6");}
-        });
-        btn7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn7");}
-        });
-        btn8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn8");}
-        });
-        btn9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn9");}
-        });
-        btn10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn10");}
-        });
-        btn11.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn11");}
-        });
-        btn12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn12");}
-        });
-        btn13.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn13");}
-        });
-        btn14.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn14");}
-        });
-        btn15.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn15");}
-        });
-        btn16.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {check_button("btn16");}
-        });
+        Button[] buttons = new Button[]{
+                findViewById(R.id.btn1), findViewById(R.id.btn2), findViewById(R.id.btn3), findViewById(R.id.btn4),
+                findViewById(R.id.btn5), findViewById(R.id.btn6), findViewById(R.id.btn7), findViewById(R.id.btn8),
+                findViewById(R.id.btn9), findViewById(R.id.btn10), findViewById(R.id.btn11), findViewById(R.id.btn12),
+                findViewById(R.id.btn13), findViewById(R.id.btn14), findViewById(R.id.btn15), findViewById(R.id.btn16)
+        };
+
+        for (int i = 0; i < buttons.length; i++) {
+            final String btnName = "btn" + (i + 1);
+            buttons[i].setOnClickListener(view -> check_button(btnName));
+        }
     }
 
     @Override
@@ -217,45 +146,39 @@ public class GameActivity extends AppCompatActivity {
         //Initializing the views of the dialog.
         correct_player = MediaPlayer.create(this, R.raw.correct);
         Button resume_btn = dialog.findViewById(R.id.resume);
-        resume_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if(Integer.parseInt(sound_status) == 1){correct_player.start();}
-                if(Integer.parseInt(vibrate_status) == 1){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        a.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
-                    } else {
-                        a.vibrate(10);
-                    }}
-                dialog_is_show = 0;
-                dialog.dismiss();
+        resume_btn.setOnClickListener(v -> {
+           Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            if(Integer.parseInt(sound_status) == 1){correct_player.start();}
+            if(Integer.parseInt(vibrate_status) == 1){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    a.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+                } else {
+                    a.vibrate(10);
+                }}
+            dialog_is_show = 0;
+            dialog.dismiss();
 
-                if(Integer.parseInt(difficulty_select) == 0) {time(count_time,time_easy);
-                }else{time(count_time,time_hard);}
-            }
+            if(Integer.parseInt(difficulty_select) == 0) {time(count_time,time_easy);
+            }else{time(count_time,time_hard);}
         });
 
         Button menu_btn = dialog.findViewById(R.id.main_menu);
-        menu_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if(Integer.parseInt(sound_status) == 1){correct_player.start();}
-                if(Integer.parseInt(vibrate_status) == 1){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        a.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
-                    } else {
-                        a.vibrate(10);
-                    }}
-                Intent intent = new Intent(GameActivity.this, MainActivity.class);
-                intent.putExtra("diff_status",difficulty_select);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-                dialog_is_show = 0;
-                dialog.dismiss();
-            }
+        menu_btn.setOnClickListener(v -> {
+            Vibrator a = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            if(Integer.parseInt(sound_status) == 1){correct_player.start();}
+            if(Integer.parseInt(vibrate_status) == 1){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    a.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+                } else {
+                    a.vibrate(10);
+                }}
+            Intent intent = new Intent(GameActivity.this, MainActivity.class);
+            intent.putExtra("diff_status",difficulty_select);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finish();
+            dialog_is_show = 0;
+            dialog.dismiss();
         });
 
 
@@ -359,157 +282,58 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void random_color(double difc){
-        final Button btn1 = findViewById(R.id.btn1);
-        final Button btn2 = findViewById(R.id.btn2);
-        final Button btn3 = findViewById(R.id.btn3);
-        final Button btn4 = findViewById(R.id.btn4);
-        final Button btn5 = findViewById(R.id.btn5);
-        final Button btn6 = findViewById(R.id.btn6);
-        final Button btn7 = findViewById(R.id.btn7);
-        final Button btn8 = findViewById(R.id.btn8);
-        final Button btn9 = findViewById(R.id.btn9);
-        final Button btn10 = findViewById(R.id.btn10);
-        final Button btn11 = findViewById(R.id.btn11);
-        final Button btn12 = findViewById(R.id.btn12);
-        final Button btn13 = findViewById(R.id.btn13);
-        final Button btn14 = findViewById(R.id.btn14);
-        final Button btn15 = findViewById(R.id.btn15);
-        final Button btn16 = findViewById(R.id.btn16);
+        Button[] buttons = new Button[]{
+                findViewById(R.id.btn1), findViewById(R.id.btn2), findViewById(R.id.btn3), findViewById(R.id.btn4),
+                findViewById(R.id.btn5), findViewById(R.id.btn6), findViewById(R.id.btn7), findViewById(R.id.btn8),
+                findViewById(R.id.btn9), findViewById(R.id.btn10), findViewById(R.id.btn11), findViewById(R.id.btn12),
+                findViewById(R.id.btn13), findViewById(R.id.btn14), findViewById(R.id.btn15), findViewById(R.id.btn16)
+        };
 
         Random rnd = new Random();
         int r = rnd.nextInt(256);
         int g = rnd.nextInt(256);
         int b = rnd.nextInt(256);
         String hex = String.format("#%02x%02x%02x", r, g, b);
+        ColorStateList baseColor = ColorStateList.valueOf(Color.parseColor(hex));
 
-        btn1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn4.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn5.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn6.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn7.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn8.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn9.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn10.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn11.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn12.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn13.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn14.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn15.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
-        btn16.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(hex)));
+        for (Button btn : buttons) {
+            btn.setBackgroundTintList(baseColor);
+        }
 
         Resources res = getResources();
         final String[] btnList = res.getStringArray(R.array.all_button);
-        int random = new Random().nextInt(16);
+        int random = rnd.nextInt(16);
 
-        int randomrgb = (new Random().nextInt(128))+20;
-        int random_forCol = new Random().nextInt(6);
-        double rr = r;double gg =g ; double bb = b;
-        switch (random_forCol){
-            case 0:
-                 rr =  r+randomrgb;
-                 gg =  g;
-                 bb =  b;
-                 if(rr>256|rr<1){rr = 90;}
-                break;
-            case 1:
-                 rr =  r-randomrgb;
-                 gg =  g;
-                 bb =  b;
-                if(rr>256|rr<1){rr = 70;}
-                break;
-            case 2:
-                rr =  r;
-                gg =  g-randomrgb;
-                bb =  b;
-                if(gg>256|gg<1){gg = 60;}
-                break;
-            case 3:
-                rr =  r;
-                gg =  g+randomrgb;
-                bb =  b;
-                if(gg>256|gg<1){gg = 160;}
-                break;
-            case 4:
-                rr =  r;
-                gg =  g;
-                bb =  b+randomrgb;
-                if(bb>256|bb<1){bb = 120;}
-                break;
-            case 5:
-                rr =  r;
-                gg =  g;
-                bb =  b-randomrgb;
-                if(bb>256|bb<1){bb = 200;}
-                break;
-            default:
-                rr =  r+50;
-                gg =  g-50;
-                bb =  b+50;
-                break;
+        // difc starts at 0.05 and increases by 0.05 per correct guess
+        // We want a difference delta that gets smaller as difc gets larger
+        // Base delta ranges from roughly 120 (easy) down to 15 (very hard).
+        // 15 is roughly the limit of human visibility for neighboring colors.
+        int targetDelta = (int) Math.max(15, 120 - (difc * 100));
+
+        // Randomly decide whether to add or subtract the delta
+        int sign = rnd.nextBoolean() ? 1 : -1;
+
+        // Choose a random channel to modify (0=R, 1=G, 2=B)
+        int channel = rnd.nextInt(3);
+
+        int rr = r, gg = g, bb = b;
+        if (channel == 0) {
+            rr = clamp(r + (targetDelta * sign));
+        } else if (channel == 1) {
+            gg = clamp(g + (targetDelta * sign));
+        } else {
+            bb = clamp(b + (targetDelta * sign));
         }
 
-        if(rr==r&&gg==g&&bb==b){rr=128;gg=128;bb=128;}
-        if(rr<0||rr>255||gg<0||gg>255|bb<0|bb>255){rr=128;gg=128;bb=128;}
         diff_col = btnList[random];
-        String diffhex = String.format("#%02x%02x%02x", ((int)rr), ((int)gg), ((int)bb));
+        String diffhex = String.format("#%02x%02x%02x", rr, gg, bb);
 
-       // Log.d(TAG, "r="+r+" g="+g+" b"+b);
-       // Log.d(TAG, "rr="+rr+" gg="+gg+" bb"+bb);
+        buttons[random].setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
 
-        switch (random){
-            case 0:
-                btn1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 1:
-                btn2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 2:
-                btn3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 3:
-                btn4.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 4:
-                btn5.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 5:
-                btn6.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 6:
-                btn7.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 7:
-                btn8.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 8:
-                btn9.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 9:
-                btn10.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 10:
-                btn11.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 11:
-                btn12.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 12:
-                btn13.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 13:
-                btn14.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 14:
-                btn15.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
-            case 15:
-                btn16.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(diffhex)));
-                break;
+    }
 
-        }
-
+    private int clamp(int val) {
+        return Math.max(0, Math.min(255, val));
     }
 
     private void check_button(String diffString){

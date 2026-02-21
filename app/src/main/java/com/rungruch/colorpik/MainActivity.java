@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
     public static final String PREFS_DATA_Difficulty = "Difficulty_PREFS";
     public static final String PREFS_DATA_Settings = "Settings_PREFS";
@@ -68,16 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("level_difficulty",diff_status);
                 editor.apply();
 
-                if(Integer.parseInt(sound_status) == 1){mediaPlayer.start();}
-                if(Integer.parseInt(vibrate_status) == 1){
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
-
-                } else {
-                    //deprecated in API 26
-                    v.vibrate(10);
-                }}
+                playSoundAndVibrate();
             }
 
             @Override
@@ -91,61 +83,44 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final Button play_btn = findViewById(R.id.playbtn);
-        play_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Integer.parseInt(sound_status) == 1){mediaPlayer.start();}
-                if(Integer.parseInt(vibrate_status) == 1){
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+        play_btn.setOnClickListener(view -> {
+            playSoundAndVibrate();
 
-                } else {
-                    //deprecated in API 26
-                    v.vibrate(10);
-                }}
-
-
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                //   String currentDiff = String.valueOf(diff_status);
-                intent.putExtra("diff_status",diff_status);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-
-            }
-
+            Intent intent = new Intent(MainActivity.this, GameActivity.class);
+            //   String currentDiff = String.valueOf(diff_status);
+            intent.putExtra("diff_status",diff_status);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finish();
 
         });
 
         final Button settings_btn = findViewById(R.id.setting);
-        settings_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Integer.parseInt(sound_status) == 1){mediaPlayer.start();}
-                if(Integer.parseInt(vibrate_status) == 1){
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+        settings_btn.setOnClickListener(view -> {
+            playSoundAndVibrate();
 
-                } else {
-                    //deprecated in API 26
-                    v.vibrate(10);
-                }}
-
-                Intent intent_setting = new Intent(MainActivity.this, SettingsActivity.class);
-                //   String currentDiff = String.valueOf(diff_status);
-                startActivity(intent_setting);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-
-
-            }
-
+            Intent intent_setting = new Intent(MainActivity.this, SettingsActivity.class);
+            //   String currentDiff = String.valueOf(diff_status);
+            startActivity(intent_setting);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            finish();
 
         });
 
 }
+
+    private void playSoundAndVibrate() {
+        if(Integer.parseInt(sound_status) == 1){mediaPlayer.start();}
+        if(Integer.parseInt(vibrate_status) == 1){
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                v.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK));
+            } else {
+                v.vibrate(10);
+            }
+        }
+    }
+
     @Override
     protected void onStop() {
 
